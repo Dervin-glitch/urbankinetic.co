@@ -1,2 +1,685 @@
 # urbankinetic.co
-aa
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>urbankinetic - Urban Streetwear</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* HEADER - IDENTIK DENGAN SEBELUMNYA */
+        .header {
+            background: #ffffff;
+            height: 90px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: #000000;
+            text-decoration: none;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .nav-desktop {
+            display: flex;
+            list-style: none;
+            gap: 45px;
+        }
+
+        .nav-desktop a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .nav-desktop a:hover {
+            color: #ff4757;
+        }
+
+        .nav-desktop a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #ff4757;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-desktop a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: 8px;
+        }
+
+        .hamburger-line {
+            width: 28px;
+            height: 3px;
+            background: #000;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .search-container {
+            position: relative;
+            width: 320px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 50px 14px 20px;
+            border: 2px solid #f1f3f4;
+            border-radius: 30px;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        .search-input:focus {
+            border-color: #ff4757;
+            box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .cart-container {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: #333;
+            padding: 12px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            background: #f8f9fa;
+            color: #ff4757;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            position: fixed;
+            top: 90px;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 90px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            transition: left 0.4s ease;
+            z-index: 999;
+            padding: 60px 0;
+        }
+
+        .mobile-menu.active { left: 0; }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mobile-menu li { width: 100%; border-bottom: 1px solid rgba(0,0,0,0.08); }
+
+        .mobile-menu a {
+            display: block;
+            padding: 25px 0;
+            color: #333;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        /* KINETIC SLIDER SECTION */
+        .slider-section {
+            position: relative;
+            height: 100vh;
+            margin-top: 90px;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .slide-content {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(20px);
+            padding: 80px 50px;
+            border-radius: 32px;
+            text-align: center;
+            color: white;
+            max-width: 700px;
+            margin: 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* KINETIC ANIMATION ELEMENTS */
+        .kinetic-element {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(255,71,87,0.3), rgba(255,107,122,0.2));
+            pointer-events: none;
+            animation: kineticFloat 6s ease-in-out infinite;
+        }
+
+        .kinetic-element:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .kinetic-element:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .kinetic-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes kineticFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+
+        .slide h2 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: kineticSlideIn 1s 0.3s forwards;
+        }
+
+        .slide p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: kineticSlideIn 1s 0.6s forwards;
+            font-weight: 300;
+        }
+
+        .slide-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff4757, #ff6b7a);
+            color: white;
+            padding: 18px 45px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 17px;
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: kineticSlideIn 1s 0.9s forwards;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 15px 35px rgba(255,71,87,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .slide-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(255,71,87,0.6);
+        }
+
+        @keyframes kineticSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* CONTROLS */
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .slider-arrow {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.3);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-arrow:hover {
+            background: rgba(255,255,255,0.5);
+            border-color: rgba(255,255,255,0.6);
+            transform: scale(1.15) translateY(-3px);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 20;
+        }
+
+        .dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .dot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.4s ease;
+        }
+
+        .dot.active::after {
+            width: 10px;
+            height: 10px;
+        }
+
+        .dot:hover {
+            transform: scale(1.3);
+            background: rgba(255,255,255,0.6);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header { padding: 0 24px; height: 80px; }
+            .header-left { gap: 24px; }
+            .nav-desktop { display: none; }
+            .hamburger { display: flex; }
+            .search-container { width: 200px; }
+            
+            .slide h2 { font-size: 2.8rem; }
+            .slide p { font-size: 1.2rem; }
+            .slider-arrow { width: 55px; height: 55px; font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-left">
+            <a href="#" class="logo">urbankinetic</a>
+            <div class="hamburger" id="hamburger">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+            <nav class="nav-desktop">
+                <a href="file:///C:/Users/Redmibook/OneDrive/Dokumen/Desain%20Baju%20PO/New%20Arrivals%20Page.html">New Arrivals</a>
+                <a href="shop.html">Shop</a>
+                <a href="categories.html">Categories</a>
+                <a href="on-sale.html">On Sale</a>
+            </nav>
+        </div>
+
+        <div class="header-right">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search products...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="cart-container">
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="file:///C:/Users/Redmibook/OneDrive/Dokumen/Desain%20Baju%20PO/New%20Arrivals%20Page.html">New Arrivals</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="on-sale.html">On Sale</a></li>
+        </ul>
+    </nav>
+
+    <!-- KINETIC SLIDER -->
+    <section class="slider-section">
+        <div class="slider" id="slider">
+            <!-- SLIDE 1 - GANTI LINK DI SINI -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                <div class="slide-content">
+                    <div class="kinetic-element"></div>
+                    <div class="kinetic-element"></div>
+                    <div class="kinetic-element"></div>
+                    <h2>New Season Drop</h2>
+                    <p>Discover kinetic energy in every urban step</p>
+                    <a href="new-arrivals.html" class="slide-btn">Shop New</a>
+                </div>
+            </div>
+
+            <!-- SLIDE 2 -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                <div class="slide-content">
+                    <div class="kinetic-element"></div>
+                    <div class="kinetic-element"></div>
+                    <div class="kinetic-element"></div>
+                    <h2>Street Kinetic</h2>
+                    <p>Move with power, style with attitude</p>
+                    <a href="shop.html" class="slide-btn">Full Shop</a>
+                </div>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                <div class="slide-content">
+                    <div class="kinetic-element"></div>
+                    <div class="kinetic-element"></div>
+                    <div class="kinetic-element"></div>
+                    <h2>Category Flow</h2>
+                    <p>Find your urban category rhythm</p>
+                    <a href="categories.html" class="slide-btn">Browse</a>
+                </div>
+            </div>
+
+            <!-- SLIDE 4 -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1585454760796-65a4d7a83f49?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                <div class="slide-content">
+                    <div class="kinetic-element"></div>
+                    <div class="kinetic-element"></div>
+                    <div class="kinetic-element"></div>
+                    <h2>Kinetic Sale</h2>
+                    <p>Explosive discounts on premium gear</p>
+                    <a href="on-sale.html" class="slide-btn">Grab Now</a>
+                </div>
+            </div>
+
+            <!-- SLIDE 5 -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                <div class="slide-content">
+                    <div class="kinetic-element"></div>
+                    <div class="kinetic-element"></div>
+                    <div class="kinetic-element"></div>
+                    <h2>Urban Motion</h2>
+                    <p>Feel the kinetic pulse of the streets</p>
+                    <a href="shop.html" class="slide-btn">Start Moving</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-controls">
+            <button class="slider-arrow" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-arrow" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <div class="slider-dots" id="sliderDots"></div>
+    </section>
+
+    <script>
+        // KINETIC SLIDER LOGIC
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const sliderDotsContainer = document.getElementById('sliderDots');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        let startX = 0;
+        let isDragging = false;
+
+        function createDots() {
+            sliderDotsContainer.innerHTML = '';
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                dot.addEventListener('click', () => goToSlide(index));
+                sliderDotsContainer.appendChild(dot);
+            });
+        }
+
+        function goToSlide(slideIndex) {
+            // Reset all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            currentSlide = slideIndex;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Activate new slide with kinetic animation
+            setTimeout(() => {
+                slides[currentSlide].classList.add('active');
+            }, 100);
+            
+            updateDots();
+        }
+
+        function updateDots() {
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % totalSlides);
+        }
+
+        function prevSlide() {
+            goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
+        }
+
+        // Controls
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // TOUCH/SWIPE MOBILE
+        let startTouchX = 0;
+        slider.addEventListener('touchstart', (e) => {
+            startTouchX = e.touches[0].clientX;
+        });
+
+        slider.addEventListener('touchend', (e) => {
+            const endTouchX = e.changedTouches[0].clientX;
+            const diffX = startTouchX - endTouchX;
+            
+            if (Math.abs(diffX) > 60) {
+                if (diffX > 0) nextSlide();
+                else prevSlide();
+            }
+        });
+
+        // MOUSE DRAG DESKTOP
+        let isMouseDown = false;
+        let startMouseX = 0;
+        slider.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+            startMouseX = e.clientX;
+            slider.style.transition = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isMouseDown) return;
+            const diffX = startMouseX - e.clientX;
+            const translateX = -(currentSlide * 100) + (diffX / window.innerWidth * 100);
+            slider.style.transform = `translateX(${translateX}%)`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isMouseDown) {
+                slider.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                isMouseDown = false;
+            }
+        });
+
+        // Initialize
+        createDots();
+        slides[0].classList.add('active');
+
+        // MOBILE MENU
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const hamburgerLines = hamburger.querySelectorAll('.hamburger-line');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            hamburgerLines[0].style.transform = mobileMenu.classList.contains('active') ? 'rotate(45deg) translate(6px, 6px)' : 'none';
+            hamburgerLines[1].style.opacity = mobileMenu.classList.contains('active') ? '0' : '1';
+            hamburgerLines[2].style.transform = mobileMenu.classList.contains('active') ? 'rotate(-45deg) translate(7px, -7px)' : 'none';
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                hamburgerLines.forEach((line, i) => {
+                    if (i === 0) line.style.transform = 'none';
+                    if (i === 1) line.style.opacity = '1';
+                    if (i === 2) line.style.transform = 'none';
+                });
+            });
+        });
+
+        // Simple Cart
+        let cartCount = 0;
+        document.getElementById('cartBadge').textContent = cartCount;
+    </script>
+</body>
+</html>
