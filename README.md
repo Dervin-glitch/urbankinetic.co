@@ -1,10 +1,12 @@
 # urbankinetic.co
+
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>urbankinetic - Urban Streetwear</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Urbankinetic - Streetwear Indonesia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -13,672 +15,705 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #ff6b35;
+            --accent: #f8f9fa;
+            --text: #333;
+            --text-light: #666;
+            --white: #fff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text);
             overflow-x: hidden;
         }
 
-        /* HEADER - IDENTIK DENGAN SEBELUMNYA */
+        /* Header */
         .header {
-            background: #ffffff;
-            height: 90px;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.08);
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
             z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 6%;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
         }
 
-        .header-left {
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 60px;
+            padding: 0 2rem;
         }
 
         .logo {
-            font-size: 32px;
+            font-size: 2rem;
             font-weight: 800;
-            color: #000000;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
-            letter-spacing: -1px;
-            text-transform: uppercase;
         }
 
-        .nav-desktop {
+        .nav-menu {
             display: flex;
             list-style: none;
-            gap: 45px;
+            gap: 2rem;
         }
 
-        .nav-desktop a {
+        .nav-menu a {
             text-decoration: none;
-            color: #333;
+            color: var(--text);
             font-weight: 500;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
             position: relative;
-            padding: 10px 0;
         }
 
-        .nav-desktop a:hover {
-            color: #ff4757;
+        .nav-menu a:hover {
+            color: var(--secondary);
         }
 
-        .nav-desktop a::after {
+        .nav-menu a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
             width: 0;
             height: 2px;
-            background: #ff4757;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
+            bottom: -5px;
+            left: 0;
+            background: var(--secondary);
+            transition: width 0.3s ease;
         }
 
-        .nav-desktop a:hover::after {
+        .nav-menu a:hover::after {
             width: 100%;
         }
 
-        .hamburger {
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .cart-icon, .search-icon {
+            font-size: 1.2rem;
+            color: var(--text);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .cart-icon:hover, .search-icon:hover {
+            color: var(--secondary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-btn {
             display: none;
             flex-direction: column;
             cursor: pointer;
             gap: 4px;
-            padding: 8px;
         }
 
-        .hamburger-line {
-            width: 28px;
+        .mobile-menu-btn span {
+            width: 25px;
             height: 3px;
-            background: #000;
-            border-radius: 2px;
-            transition: all 0.3s ease;
+            background: var(--primary);
+            transition: 0.3s;
         }
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .search-container {
-            position: relative;
-            width: 320px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 14px 50px 14px 20px;
-            border: 2px solid #f1f3f4;
-            border-radius: 30px;
-            font-size: 15px;
-            outline: none;
-            transition: all 0.3s ease;
-            background: #fafbfc;
-        }
-
-        .search-input:focus {
-            border-color: #ff4757;
-            box-shadow: 0 0 0 4px rgba(255, 71, 87, 0.1);
-        }
-
-        .search-btn {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .cart-container {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .cart-icon {
-            font-size: 24px;
-            color: #333;
-            padding: 12px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .cart-icon:hover {
-            background: #f8f9fa;
-            color: #ff4757;
-        }
-
-        .cart-badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #ff4757;
-            color: white;
-            border-radius: 50%;
-            width: 22px;
-            height: 22px;
-            font-size: 12px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* MOBILE MENU */
-        .mobile-menu {
-            position: fixed;
-            top: 90px;
-            left: -100%;
-            width: 100%;
-            height: calc(100vh - 90px);
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            transition: left 0.4s ease;
-            z-index: 999;
-            padding: 60px 0;
-        }
-
-        .mobile-menu.active { left: 0; }
-
-        .mobile-menu ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .mobile-menu li { width: 100%; border-bottom: 1px solid rgba(0,0,0,0.08); }
-
-        .mobile-menu a {
-            display: block;
-            padding: 25px 0;
-            color: #333;
-            font-size: 20px;
-            font-weight: 600;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        /* KINETIC SLIDER SECTION */
-        .slider-section {
-            position: relative;
+        /* Hero Section */
+        .hero {
             height: 100vh;
-            margin-top: 90px;
-            overflow: hidden;
-        }
-
-        .slider {
-            display: flex;
-            height: 100%;
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%231a1a1a" width="1200" height="800"/><text x="50%" y="50%" font-family="Inter, sans-serif" font-size="80" fill="%23ff6b35" text-anchor="middle" dy=".3em">URBANKINETIC</text><text x="50%" y="60%" font-family="Inter, sans-serif" font-size="24" fill="%23fff" text-anchor="middle" dy=".3em">STREETWEAR INDONESIA</text></svg>');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            opacity: 0;
-            transform: translateY(50px) scale(0.95);
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .slide.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .slide-content {
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(20px);
-            padding: 80px 50px;
-            border-radius: 32px;
             text-align: center;
             color: white;
-            max-width: 700px;
-            margin: 0 30px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255,107,53,0.4);
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 8rem 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 300px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
             position: relative;
             overflow: hidden;
         }
 
-        /* KINETIC ANIMATION ELEMENTS */
-        .kinetic-element {
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-image::before {
+            content: '';
             position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
             border-radius: 50%;
-            background: linear-gradient(45deg, rgba(255,71,87,0.3), rgba(255,107,122,0.2));
-            pointer-events: none;
-            animation: kineticFloat 6s ease-in-out infinite;
-        }
-
-        .kinetic-element:nth-child(1) {
-            width: 120px;
-            height: 120px;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .kinetic-element:nth-child(2) {
-            width: 80px;
-            height: 80px;
-            top: 60%;
-            right: 15%;
-            animation-delay: 2s;
-        }
-
-        .kinetic-element:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
-        }
-
-        @keyframes kineticFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-20px) rotate(120deg); }
-            66% { transform: translateY(10px) rotate(240deg); }
-        }
-
-        .slide h2 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 24px;
-            letter-spacing: -2px;
             opacity: 0;
-            transform: translateY(30px);
-            animation: kineticSlideIn 1s 0.3s forwards;
+            transition: opacity 0.3s ease;
         }
 
-        .slide p {
-            font-size: 1.4rem;
-            margin-bottom: 40px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: kineticSlideIn 1s 0.6s forwards;
-            font-weight: 300;
+        .product-card:hover .product-image::before {
+            opacity: 1;
         }
 
-        .slide-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff4757, #ff6b7a);
-            color: white;
-            padding: 18px 45px;
-            text-decoration: none;
-            border-radius: 50px;
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: var(--secondary);
+            font-size: 0.9rem;
             font-weight: 600;
-            font-size: 17px;
-            opacity: 0;
-            transform: translateY(30px) scale(0.9);
-            animation: kineticSlideIn 1s 0.9s forwards;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 15px 35px rgba(255,71,87,0.4);
-            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
         }
 
-        .slide-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 25px 50px rgba(255,71,87,0.6);
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
-        @keyframes kineticSlideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        /* Collection Section */
+        .collections {
+            padding: 8rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .collections-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .collection-card {
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .collection-card:hover {
+            transform: scale(1.02);
+        }
+
+        .collection-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .collection-card:hover .collection-overlay {
+            opacity: 1;
+        }
+
+        .collection-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* CONTROLS */
-        .slider-controls {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 30px;
-            pointer-events: none;
-            z-index: 20;
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .slider-arrow {
-            background: rgba(255,255,255,0.25);
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(255,255,255,0.3);
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            pointer-events: all;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .slider-arrow:hover {
-            background: rgba(255,255,255,0.5);
-            border-color: rgba(255,255,255,0.6);
-            transform: scale(1.15) translateY(-3px);
-        }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
-            z-index: 20;
-        }
-
-        .dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-        }
-
-        .dot::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: white;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.4s ease;
-        }
-
-        .dot.active::after {
-            width: 10px;
-            height: 10px;
-        }
-
-        .dot:hover {
-            transform: scale(1.3);
-            background: rgba(255,255,255,0.6);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .header { padding: 0 24px; height: 80px; }
-            .header-left { gap: 24px; }
-            .nav-desktop { display: none; }
-            .hamburger { display: flex; }
-            .search-container { width: 200px; }
-            
-            .slide h2 { font-size: 2.8rem; }
-            .slide p { font-size: 1.2rem; }
-            .slider-arrow { width: 55px; height: 55px; font-size: 18px; }
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
         }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="header">
-        <div class="header-left">
-            <a href="#" class="logo">urbankinetic</a>
-            <div class="hamburger" id="hamburger">
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-            </div>
-            <nav class="nav-desktop">
-                <a href="file:///C:/Users/Redmibook/OneDrive/Dokumen/Desain%20Baju%20PO/New%20Arrivals%20Page.html">New Arrivals</a>
-                <a href="shop.html">Shop</a>
-                <a href="categories.html">Categories</a>
-                <a href="on-sale.html">On Sale</a>
-            </nav>
-        </div>
-
-        <div class="header-right">
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search products...">
-                <button class="search-btn"><i class="fas fa-search"></i></button>
-            </div>
-            <div class="cart-container">
-                <div class="cart-icon">
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="#" class="logo">URBANKINETIC</a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="header-actions">
+                <i class="fas fa-search search-icon" onclick="openSearch()"></i>
+                <div class="cart-icon" onclick="openCart()">
                     <i class="fas fa-shopping-bag"></i>
-                    <span class="cart-badge" id="cartBadge">0</span>
+                    <span class="cart-count">3</span>
                 </div>
+            </div>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </header>
 
-    <!-- MOBILE MENU -->
-    <nav class="mobile-menu" id="mobileMenu">
-        <ul>
-            <li><a href="file:///C:/Users/Redmibook/OneDrive/Dokumen/Desain%20Baju%20PO/New%20Arrivals%20Page.html">New Arrivals</a></li>
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="categories.html">Categories</a></li>
-            <li><a href="on-sale.html">On Sale</a></li>
-        </ul>
-    </nav>
-
-    <!-- KINETIC SLIDER -->
-    <section class="slider-section">
-        <div class="slider" id="slider">
-            <!-- SLIDE 1 - GANTI LINK DI SINI -->
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
-                <div class="slide-content">
-                    <div class="kinetic-element"></div>
-                    <div class="kinetic-element"></div>
-                    <div class="kinetic-element"></div>
-                    <h2>New Season Drop</h2>
-                    <p>Discover kinetic energy in every urban step</p>
-                    <a href="new-arrivals.html" class="slide-btn">Shop New</a>
-                </div>
-            </div>
-
-            <!-- SLIDE 2 -->
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
-                <div class="slide-content">
-                    <div class="kinetic-element"></div>
-                    <div class="kinetic-element"></div>
-                    <div class="kinetic-element"></div>
-                    <h2>Street Kinetic</h2>
-                    <p>Move with power, style with attitude</p>
-                    <a href="shop.html" class="slide-btn">Full Shop</a>
-                </div>
-            </div>
-
-            <!-- SLIDE 3 -->
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
-                <div class="slide-content">
-                    <div class="kinetic-element"></div>
-                    <div class="kinetic-element"></div>
-                    <div class="kinetic-element"></div>
-                    <h2>Category Flow</h2>
-                    <p>Find your urban category rhythm</p>
-                    <a href="categories.html" class="slide-btn">Browse</a>
-                </div>
-            </div>
-
-            <!-- SLIDE 4 -->
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1585454760796-65a4d7a83f49?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
-                <div class="slide-content">
-                    <div class="kinetic-element"></div>
-                    <div class="kinetic-element"></div>
-                    <div class="kinetic-element"></div>
-                    <h2>Kinetic Sale</h2>
-                    <p>Explosive discounts on premium gear</p>
-                    <a href="on-sale.html" class="slide-btn">Grab Now</a>
-                </div>
-            </div>
-
-            <!-- SLIDE 5 -->
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
-                <div class="slide-content">
-                    <div class="kinetic-element"></div>
-                    <div class="kinetic-element"></div>
-                    <div class="kinetic-element"></div>
-                    <h2>Urban Motion</h2>
-                    <p>Feel the kinetic pulse of the streets</p>
-                    <a href="shop.html" class="slide-btn">Start Moving</a>
-                </div>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>URBANKINETIC</h1>
+            <p>Streetwear Indonesia<br>Built for the Culture</p>
+            <a href="#products" class="cta-button">Shop Now</a>
         </div>
-
-        <div class="slider-controls">
-            <button class="slider-arrow" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-            <button class="slider-arrow" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-        </div>
-
-        <div class="slider-dots" id="sliderDots"></div>
     </section>
 
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23ff6b35' x='20%' y='20%' width='60%' height='60%' rx='20'/><text x='50%' y='55%' font-family='Inter,sans-serif' font-size='24' fill='%23fff' text-anchor='middle' font-weight='700'>HOODIE</text><text x='50%' y='65%' font-family='Inter,sans-serif' font-size='16' fill='%23fff' text-anchor='middle' opacity='0.9'>Limited Drop</text></svg>" alt="Hoodie">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">New Drop</div>
+                    <h3 class="product-name">Urban Kinetic Hoodie</h3>
+                    <div class="product-price">Rp 899.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%231a1a1a' x='15%' y='15%' width='70%' height='70%' rx='15'/><circle cx='50%' cy='40%' r='25%' fill='%23ff6b35'/><text x='50%' y='75%' font-family='Inter,sans-serif' font-size='24' fill='%23fff' text-anchor='middle' font-weight='700'>SNKR</text></svg>" alt="Sneakers">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Footwear</div>
+                    <h3 class="product-name">Kinetic Runners</h3>
+                    <div class="product-price">Rp 1.299.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' x='10%' y='10%' width='80%' height='80%' rx='25'/><rect fill='%231a1a1a' x='25%' y='25%' width='50%' height='50%' rx='10'/><text x='50%' y='85%' font-family='Inter,sans-serif' font-size='22' fill='%23222' text-anchor='middle' font-weight='700'>TEES</text></svg>" alt="T-Shirt">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Essentials</div>
+                    <h3 class="product-name">Street Tee</h3>
+                    <div class="product-price">Rp 399.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23ff6b35' x='20%' y='15%' width='60%' height='70%' rx='15'/><rect fill='%23fff' x='30%' y='30%' width='40%' height='20%' rx='5'/><text x='50%' y='80%' font-family='Inter,sans-serif' font-size='20' fill='%23fff' text-anchor='middle' font-weight='700'>CAP</text></svg>" alt="Cap">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Accessories</div>
+                    <h3 class="product-name">Kinetic Snapback</h3>
+                    <div class="product-price">Rp 299.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%231a1a1a' x='15%' y='20%' width='70%' height='60%' rx='20'/><circle cx='35%' cy='45%' r='8%' fill='%23ff6b35'/><circle cx='65%' cy='45%' r='8%' fill='%23ff6b35'/><text x='50%' y='75%' font-family='Inter,sans-serif' font-size='22' fill='%23fff' text-anchor='middle' font-weight='700'>JKT</text></svg>" alt="Jacket">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Outerwear</div>
+                    <h3 class="product-name">Jakarta Bomber</h3>
+                    <div class="product-price">Rp 1.499.000</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' x='25%' y='25%' width='50%' height='50%' rx='15'/><rect fill='%23ff6b35' x='35%' y='35%' width='30%' height='30%' rx='8'/><text x='50%' y='85%' font-family='Inter,sans-serif' font-size='20' fill='%23222' text-anchor='middle' font-weight='700'>BAG</text></svg>" alt="Bag">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Accessories</div>
+                    <h3 class="product-name">Urban Backpack</h3>
+                    <div class="product-price">Rp 799.000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section class="collections" id="collections">
+        <div class="products-section">
+            <h2 class="section-title">Collections</h2>
+            <div class="collections-grid">
+                <div class="collection-card" style="background: linear-gradient(-45deg, #1a1a1a, #2d2d2d);">
+                    <div class="collection-overlay">
+                        <h3 class="collection-title">STREET</h3>
+                        <p>Classic streetwear essentials</p>
+                    </div>
+                </div>
+                <div class="collection-card" style="background: linear-gradient(-45deg, #ff6b35, #ff8e60);">
+                    <div class="collection-overlay">
+                        <h3 class="collection-title">LIMITED</h3>
+                        <p>Exclusive drops only</p>
+                    </div>
+                </div>
+                <div class="collection-card" style="background: linear-gradient(-45deg, #f8f9fa, #e9ecef);">
+                    <div class="collection-overlay">
+                        <h3 class="collection-title">ESSENTIALS</h3>
+                        <p>Everyday must-haves</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>URBANKINETIC</h3>
+                <p>Streetwear brand from Indonesia, built for the streets and culture.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#"><i class="fab fa-instagram" style="margin-right: 1rem; font-size: 1.2rem;"></i></a>
+                    <a href="#"><i class="fab fa-tiktok" style="margin-right: 1rem; font-size: 1.2rem;"></i></a>
+                    <a href="#"><i class="fab fa-twitter" style="font-size: 1.2rem;"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#products">New Arrivals</a>
+                <a href="#collections">Collections</a>
+                <a href="#">Track Order</a>
+                <a href="#">Returns</a>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <a href="#">FAQ</a>
+                <a href="#">Shipping</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Size Guide</a>
+            </div>
+            <div class="footer-section">
+                <h3>Stay Updated</h3>
+                <p>Get the latest drops and exclusive offers</p>
+                <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                    <input type="email" placeholder="Email address" style="flex: 1; padding: 0.8rem; border: 1px solid #444; border-radius: 8px; background: transparent; color: white;">
+                    <button style="padding: 0.8rem 1.5rem; background: var(--secondary); border: none; border-radius: 8px; color: white; cursor: pointer;">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Urbankinetic. All rights reserved. Made in Indonesia 🇮🇩</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2><i class="fas fa-shopping-bag"></i> Shopping Cart (3)</h2>
+            <div style="margin: 2rem 0;">
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><rect fill='%23ff6b35' width='80' height='80' rx='10'/></svg>" style="width: 80px; height: 80px; border-radius: 10px;">
+                    <div style="flex: 1;">
+                        <h4>Urban Kinetic Hoodie</h4>
+                        <p>Rp 899.000</p>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <button style="width: 30px; height: 30px; border: 1px solid #ddd; background: white; border-radius: 4px;">-</button>
+                            <span>1</span>
+                            <button style="width: 30px; height: 30px; border: 1px solid #ddd; background: white; border-radius: 4px;">+</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- More cart items -->
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button style="background: var(--secondary); color: white; padding: 1rem 3rem; border: none; border-radius: 50px; font-size: 1.1rem; cursor: pointer;">Checkout (Rp 2.097.000)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // KINETIC SLIDER LOGIC
-        const slider = document.getElementById('slider');
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const sliderDotsContainer = document.getElementById('sliderDots');
-        
-        let currentSlide = 0;
-        const totalSlides = slides.length;
-        let startX = 0;
-        let isDragging = false;
-
-        function createDots() {
-            sliderDotsContainer.innerHTML = '';
-            slides.forEach((_, index) => {
-                const dot = document.createElement('div');
-                dot.classList.add('dot');
-                dot.addEventListener('click', () => goToSlide(index));
-                sliderDotsContainer.appendChild(dot);
-            });
-        }
-
-        function goToSlide(slideIndex) {
-            // Reset all slides
-            slides.forEach(slide => slide.classList.remove('active'));
-            
-            currentSlide = slideIndex;
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
-            // Activate new slide with kinetic animation
-            setTimeout(() => {
-                slides[currentSlide].classList.add('active');
-            }, 100);
-            
-            updateDots();
-        }
-
-        function updateDots() {
-            document.querySelectorAll('.dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        function nextSlide() {
-            goToSlide((currentSlide + 1) % totalSlides);
-        }
-
-        function prevSlide() {
-            goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
-        }
-
-        // Controls
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-
-        // TOUCH/SWIPE MOBILE
-        let startTouchX = 0;
-        slider.addEventListener('touchstart', (e) => {
-            startTouchX = e.touches[0].clientX;
-        });
-
-        slider.addEventListener('touchend', (e) => {
-            const endTouchX = e.changedTouches[0].clientX;
-            const diffX = startTouchX - endTouchX;
-            
-            if (Math.abs(diffX) > 60) {
-                if (diffX > 0) nextSlide();
-                else prevSlide();
-            }
-        });
-
-        // MOUSE DRAG DESKTOP
-        let isMouseDown = false;
-        let startMouseX = 0;
-        slider.addEventListener('mousedown', (e) => {
-            isMouseDown = true;
-            startMouseX = e.clientX;
-            slider.style.transition = 'none';
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!isMouseDown) return;
-            const diffX = startMouseX - e.clientX;
-            const translateX = -(currentSlide * 100) + (diffX / window.innerWidth * 100);
-            slider.style.transform = `translateX(${translateX}%)`;
-        });
-
-        document.addEventListener('mouseup', () => {
-            if (isMouseDown) {
-                slider.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                isMouseDown = false;
-            }
-        });
-
-        // Initialize
-        createDots();
-        slides[0].classList.add('active');
-
-        // MOBILE MENU
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const hamburgerLines = hamburger.querySelectorAll('.hamburger-line');
-
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            hamburgerLines[0].style.transform = mobileMenu.classList.contains('active') ? 'rotate(45deg) translate(6px, 6px)' : 'none';
-            hamburgerLines[1].style.opacity = mobileMenu.classList.contains('active') ? '0' : '1';
-            hamburgerLines[2].style.transform = mobileMenu.classList.contains('active') ? 'rotate(-45deg) translate(7px, -7px)' : 'none';
-        });
-
-        // Close menu on link click
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                hamburgerLines.forEach((line, i) => {
-                    if (i === 0) line.style.transform = 'none';
-                    if (i === 1) line.style.opacity = '1';
-                    if (i === 2) line.style.transform = 'none';
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
             });
         });
 
-        // Simple Cart
-        let cartCount = 0;
-        document.getElementById('cartBadge').textContent = cartCount;
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255,255,255,0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.background = 'rgba(255,255,255,0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Modal functions
+        function openCart() {
+            document.getElementById('cartModal').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function openSearch() {
+            alert('Search functionality - Coming soon!');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.product-card, .collection-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Cart counter animation
+        const cartCount = document.querySelector('.cart-count');
+        setInterval(() => {
+            const current = parseInt(cartCount.textContent);
+            cartCount.textContent = current + Math.floor(Math.random() * 2);
+        }, 10000);
     </script>
 </body>
 </html>
